@@ -135,7 +135,8 @@
             <el-input type="text" v-model="temp.projectName"></el-input>
           </el-form-item>
           <el-form-item size="small" :label="'計畫宗旨'">
-            <el-input type="text" v-model="temp.projectPurpose"></el-input>
+            <!-- <el-input type="text" v-model="temp.projectPurpose"></el-input> -->
+            <ckeditor v-model="temp.projectPurpose" :value="temp.projectPurpose" :config="setConfig" />
           </el-form-item>
           <el-form-item size="small" :label="'計畫摘要'">
             <el-input type="text" v-model="temp.summary"></el-input>
@@ -164,7 +165,8 @@
             <el-input type="text" v-model="temp.subsidyObject"></el-input>
           </el-form-item>
           <el-form-item size="small" :label="'資金額度'">
-            <el-input type="text" v-model="temp.amount"></el-input>
+            <!-- <el-input type="text" v-model="temp.amount"></el-input> -->
+            <ckeditor v-model="temp.amount" :value="temp.amount" :config="setConfig" />
           </el-form-item>
           <el-form-item size="small" :label="'申請方式'">
             <!-- <el-input type="text" v-model="temp.applyMethod"></el-input> -->
@@ -190,6 +192,9 @@
           </el-form-item>
           <el-form-item size="small" :label="'相關網站連結'">
             <el-input type="text" v-model="temp.webLink"></el-input>
+          </el-form-item>
+          <el-form-item size="small" :label="'URL'">
+            <el-input type="text" v-model="temp.url"></el-input>
           </el-form-item>
         </el-form>
 
@@ -314,6 +319,7 @@ export default {
         consultation: "",
         webName: "",
         webLink: "",
+        url: "",
       },
       dateRange: "",
       dialogStatus: "",
@@ -403,6 +409,7 @@ export default {
         consultation: "",
         webName: "",
         webLink: "",
+        url: "",
       };
     },
     handleCreate() {

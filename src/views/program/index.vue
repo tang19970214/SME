@@ -193,7 +193,7 @@
           <el-form-item size="small" :label="'相關網站連結'">
             <el-input type="text" v-model="temp.webLink"></el-input>
           </el-form-item>
-          <el-form-item size="small" :label="'URL'">
+          <el-form-item size="small" :label="'前台連結'">
             <el-input type="text" v-model="temp.url"></el-input>
           </el-form-item>
         </el-form>

@@ -483,9 +483,12 @@ export default {
   computed: {
     selectOrgs: {
       get: function () {
+        console.log(this.temp.organizationIds, this.dialogStatus);
         if (this.dialogStatus === "update") {
           return (
-            this.temp.organizationIds && this.temp.organizationIds.split(",")
+            (this.temp.organizationIds &&
+              this.temp.organizationIds.split(",")) ||
+            []
           );
         } else {
           return [];

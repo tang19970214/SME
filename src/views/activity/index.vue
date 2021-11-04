@@ -146,6 +146,9 @@
           <el-form-item size="small" :label="'活動內容'">
             <ckeditor v-model="temp.contents" :value="temp.contents" :config="setConfig" :read-only="checkAuth" />
           </el-form-item>
+          <el-form-item size="small" :label="'地圖嵌入碼'">
+            <ckeditor v-model="temp.mapCode" :value="temp.mapCode" :config="setConfig" :read-only="checkAuth" />
+          </el-form-item>
           <el-form-item size="small" :label="'主辦單位名稱'">
             <el-input v-model="temp.mainUnit" maxlength="50" show-word-limit :disabled="dialogStatus == 'view' || dialogStatus == 'audit'"></el-input>
           </el-form-item>
@@ -433,6 +436,7 @@ export default {
         publishDate: "",
         browseCount: 0,
         isOnline: true,
+        mapCode: "",
       },
       imgInfo: {},
       dialogFormVisible: false,
@@ -751,6 +755,7 @@ export default {
         publishDate: "",
         browseCount: 0,
         isOnline: true,
+        mapCode: "",
       };
     },
     handleCreate() {

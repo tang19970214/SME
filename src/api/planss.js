@@ -31,3 +31,11 @@ export function del(data) {
         data
     })
 }
+
+export function planLog(params) {
+    return request({
+        url: '/Planss/PlanLog',
+        method: 'get',
+        params
+    })
+}

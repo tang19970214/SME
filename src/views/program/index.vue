@@ -162,7 +162,8 @@
             </el-select>
           </el-form-item>
           <el-form-item size="small" :label="'補助對象'">
-            <el-input type="text" v-model="temp.subsidyObject"></el-input>
+            <!-- <el-input type="text" v-model="temp.subsidyObject"></el-input> -->
+            <ckeditor v-model="temp.subsidyObject" :value="temp.subsidyObject" :config="setConfig" />
           </el-form-item>
           <el-form-item size="small" :label="'資金額度'">
             <!-- <el-input type="text" v-model="temp.amount"></el-input> -->
@@ -173,7 +174,8 @@
             <ckeditor v-model="temp.applyMethod" :value="temp.applyMethod" :config="setConfig" />
           </el-form-item>
           <el-form-item size="small" :label="'備註'">
-            <el-input type="text" v-model="temp.remark"></el-input>
+            <!-- <el-input type="text" v-model="temp.remark"></el-input> -->
+            <ckeditor v-model="temp.remark" :value="temp.remark" :config="setConfig" />
           </el-form-item>
           <el-form-item size="small" :label="'受理時間'">
             <el-select v-model="temp.acceptanceDate" clearable placeholder="請選擇受理時間" @change="setAcceptanceDate">

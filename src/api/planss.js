@@ -39,3 +39,11 @@ export function planLog(params) {
         params
     })
 }
+
+export function exporPlanLog(params) {
+    return request({
+        url: '/Planss/exporPlanLog',
+        method: 'get',
+        params
+    })
+}

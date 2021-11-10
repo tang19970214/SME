@@ -239,7 +239,7 @@
             <img :src="imgInfo.url" class="avatar" />
           </el-form-item>
           <el-form-item size="small" :label="'單位簡介'" prop="summary">
-            <ckeditor v-model="tempOrg.contents" :value="tempOrg.contents" :config="setHiddenConfig" :read-only="true" />
+            <ckeditor v-model="tempOrg.contents" :value="tempOrg.contents" :config="setConfig" :read-only="true" />
           </el-form-item>
           <el-form-item size="small" :label="'相關網站'">
             <el-form-item v-for="(domain, index) in dynamicValidateForm" :key="index">
@@ -366,14 +366,120 @@ export default {
       districtData: cityAndCountiesLite,
 
       setConfig: {
-        readOnly: false,
-        extraPlugins: "button, panelbutton, colorbutton",
+        allowedContent: true,
+        toolbar: [
+          {
+            name: "document",
+            items: [
+              "Source",
+              "-",
+              "Save",
+              "NewPage",
+              "Preview",
+              "Print",
+              "-",
+              "Templates",
+            ],
+          },
+          {
+            name: "clipboard",
+            items: [
+              "Cut",
+              "Copy",
+              "Paste",
+              "PasteText",
+              "PasteFromWord",
+              "-",
+              "Undo",
+              "Redo",
+            ],
+          },
+          {
+            name: "editing",
+            items: [
+              "Find",
+              "Replace",
+              "-",
+              "SelectAll",
+              "-",
+              "SpellChecker",
+              "Scayt",
+            ],
+          },
+          {
+            name: "forms",
+            items: [
+              "Form",
+              "Checkbox",
+              "Radio",
+              "TextField",
+              "Textarea",
+              "Select",
+              "Button",
+              "ImageButton",
+              "HiddenField",
+            ],
+          },
+          "/",
+          {
+            name: "basicstyles",
+            items: [
+              "Bold",
+              "Italic",
+              "Underline",
+              "Strike",
+              "Subscript",
+              "Superscript",
+              "-",
+              "RemoveFormat",
+            ],
+          },
+          {
+            name: "paragraph",
+            items: [
+              "NumberedList",
+              "BulletedList",
+              "-",
+              "Outdent",
+              "Indent",
+              "-",
+              "Blockquote",
+              "CreateDiv",
+              "-",
+              "JustifyLeft",
+              "JustifyCenter",
+              "JustifyRight",
+              "JustifyBlock",
+              "-",
+              "BidiLtr",
+              "BidiRtl",
+            ],
+          },
+          { name: "links", items: ["Link", "Unlink", "Anchor"] },
+          {
+            name: "insert",
+            items: [
+              "Image",
+              "Flash",
+              "Table",
+              "HorizontalRule",
+              "Smiley",
+              "SpecialChar",
+              "PageBreak",
+              "Iframe",
+            ],
+          },
+          "/",
+          { name: "styles", items: ["Styles", "Format", "Font", "FontSize"] },
+          { name: "colors", items: ["TextColor", "BGColor"] },
+          { name: "tools", items: ["Maximize", "ShowBlocks", "-"] },
+        ],
       },
 
-      setHiddenConfig: {
-        readOnly: true,
-        extraPlugins: "button, panelbutton, colorbutton",
-      },
+      // setHiddenConfig: {
+      //   readOnly: true,
+      //   extraPlugins: "button, panelbutton, colorbutton",
+      // },
 
       tableList: [],
       activityTagList: [],

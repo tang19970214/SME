@@ -367,6 +367,8 @@ export default {
 
       setConfig: {
         allowedContent: true,
+        enterMode: 2,
+        shiftEnterMode: 1,
         toolbar: [
           {
             name: "document",

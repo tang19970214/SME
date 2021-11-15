@@ -19,6 +19,7 @@
         <el-table-column prop="q8" label="資金用途"></el-table-column>
         <el-table-column prop="q9" label="產業類別"></el-table-column>
         <el-table-column prop="createDate" label="創建時間"></el-table-column>
+        <el-table-column prop="createUserName" label="填寫者帳號"></el-table-column>
       </el-table>
       <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="handleCurrentChange" />
     </div>

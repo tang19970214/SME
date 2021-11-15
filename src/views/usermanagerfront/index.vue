@@ -57,34 +57,17 @@
               <el-table-column width="170px" :label="'最近修改日期'" prop="modifyDate"></el-table-column>
               <el-table-column width="170px" :label="'創建時間'" prop="createTime"></el-table-column>
 
-              <el-table-column :label="'操作'" class-name="small-padding" min-width="300">
+              <el-table-column :label="'操作'" class-name="small-padding" min-width="850">
                 <template slot-scope="scope">
                   <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">編輯</el-button>
                   <el-button size="mini" type="danger" v-if="hasButton('btnStop') && scope.row.status == 1" @click="handleModifyStatus(scope.row, 0)">停用</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnUserSup') &&
-                      setCoachingAuth(scope.row.roles)
-                    " @click="openUserDialog('coaching', scope.row.id)">輔導顧問</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnBasic') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('basic', scope.row.id)">基本資料</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnCompany') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('developing', scope.row.id)">公司發展階段</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnCompanyOperation') &&
-                      setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('operations', scope.row.id)">營運狀況</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnTeams') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('teams', scope.row.id)">經營團隊說明</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnShareHolder') &&
-                      setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('shareHolders', scope.row.id)">股東結構說明</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnOther') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('other', scope.row.id)">其他項目</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('coaching', scope.row.id)">輔導顧問</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('basic', scope.row.id)">基本資料</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('developing', scope.row.id)">公司發展階段</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('operations', scope.row.id)">營運狀況</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('teams', scope.row.id)">經營團隊說明</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('shareHolders', scope.row.id)">股東結構說明</el-button>
+                  <el-button type="info" size="mini" @click="openUserDialog('other', scope.row.id)">其他項目</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -365,7 +348,7 @@ export default {
       listQuery: {
         orgId: "",
         roleId: "",
-        typeId: "0",
+        typeId: "1",
         CreateStartDate: "",
         CreateEndDate: "",
         HasCompany: "",

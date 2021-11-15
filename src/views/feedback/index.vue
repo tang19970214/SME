@@ -64,10 +64,10 @@
             <span>{{tempView.typeName}}</span>
           </el-form-item>
           <el-form-item size="small" :label="'問題概述'">
-            <span>{{tempView.sysFeedBack}}</span>
+            <span>{{tempView.summary}}</span>
           </el-form-item>
           <el-form-item size="small" :label="'詳情'">
-            <span>{{tempView.summary}}</span>
+            <span>{{tempView.sysFeedBack}}</span>
           </el-form-item>
           <el-form-item size="small" :label="'回覆'">
             <el-input type="textarea" :rows="5" v-model="tempView.replayFeedBack"></el-input>

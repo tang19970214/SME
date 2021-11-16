@@ -9,10 +9,10 @@
     <div class="app-container flex-item">
       <div class="bg-white" style="height: 100%">
         <el-table ref="mainTable" height="calc(100% - 52px)" :key="tableKey" :data="tableList" v-loading="listLoading" border fit highlight-current-row style="width: 100%">
-          <el-table-column prop="schemeType" label="方案類型" min-width="150"></el-table-column>
+          <el-table-column prop="schemeType" label="方案類型" min-width="100"></el-table-column>
           <el-table-column prop="mainOrg" label="主辦單位"></el-table-column>
           <el-table-column prop="projectName" label="計畫名稱"></el-table-column>
-          <el-table-column prop="projectPurpose" label="計畫摘要"></el-table-column>
+          <el-table-column prop="summary" label="計畫摘要" min-width="200"></el-table-column>
           <el-table-column prop="area" label="地區"></el-table-column>
           <el-table-column prop="userType" label="對象"></el-table-column>
           <el-table-column prop="acceptanceDate" label="受理時間" width="160"></el-table-column>

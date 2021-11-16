@@ -140,7 +140,7 @@
             <el-input v-model="menuTemp.domId"></el-input>
           </el-form-item>
           <el-form-item size="small" :label="'隱藏於權限組件'">
-            <el-switch v-model="menuTemp.attr" active-value="true" inactive-value="false"></el-switch>
+            <el-switch v-model="menuTemp.attr" active-value="true" inactive-value=""></el-switch>
           </el-form-item>
           <el-form-item size="small" :label="'樣式'">
             <el-select class="w-full" v-model="menuTemp.class">

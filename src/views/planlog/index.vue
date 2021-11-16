@@ -106,6 +106,11 @@
           <el-date-picker class="w-full" v-model="dateRange" type="daterange" size="mini" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="開始日期" end-placeholder="結束日期">
           </el-date-picker>
         </el-form-item>
+
+        <el-form-item label="關鍵字">
+          <el-input class="w-full" v-model="listQuery.key" size="mini" placeholder="請輸入關鍵字">
+          </el-input>
+        </el-form-item>
       </el-form>
 
       <div slot="footer">
@@ -146,7 +151,7 @@ export default {
         EndDate: "",
         page: 1,
         limit: 20,
-        key: "登錄日誌",
+        key: "",
       },
 
       listLoading: true,

@@ -30,7 +30,7 @@
               </el-table-column>
 
               <el-table-column :label="'Id'" v-if="showDescription" width="180px" prop="id"></el-table-column>
-              <el-table-column width="150px" :label="'帳號'">
+              <el-table-column min-width="150px" :label="'帳號'">
                 <template slot-scope="scope">
                   <span class="link-type" @click="handleUpdate(scope.row)">{{
                     scope.row.account
@@ -38,9 +38,9 @@
                 </template>
               </el-table-column>
 
-              <el-table-column width="150px" :label="'姓名'" prop="name"></el-table-column>
-              <el-table-column width="120px" :label="'職稱'" prop="userTitle"></el-table-column>
-              <el-table-column width="200px" :label="'主要專長'" prop="mainSpecialty"></el-table-column>
+              <el-table-column min-width="150px" :label="'姓名'" prop="name"></el-table-column>
+              <!-- <el-table-column width="120px" :label="'職稱'" prop="userTitle"></el-table-column> -->
+              <!-- <el-table-column width="200px" :label="'主要專長'" prop="mainSpecialty"></el-table-column>
               <el-table-column width="150px" :label="'角色'" prop="roles"></el-table-column>
               <el-table-column width="150px" :label="'單位'" prop="organizations"></el-table-column>
               <el-table-column width="150px" :label="'綁定帳號'" prop="googleMail"></el-table-column>
@@ -52,7 +52,7 @@
                       .display_name
                   }}</span>
                 </template>
-              </el-table-column>
+              </el-table-column> -->
 
               <el-table-column width="170px" :label="'最近修改日期'" prop="modifyDate"></el-table-column>
               <el-table-column width="170px" :label="'創建時間'" prop="createTime"></el-table-column>
@@ -94,9 +94,9 @@
                   : '如果為空則默認與帳號相同'
               "></el-input>
           </el-form-item>
-          <el-form-item size="small" :label="'角色'">
+          <!-- <el-form-item size="small" :label="'角色'">
             <treeselect :options="roleOptions" :default-expand-level="3" :multiple="true" :flat="true" :open-on-click="true" :open-on-focus="true" :clear-on-select="true" v-model="selectRoleIds"></treeselect>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item size="small" :label="'狀態'">
             <el-select class="filter-item w-full" v-model="temp.status" placeholder="Please select">
               <el-option v-for="item in statusOptions" :key="item.key" :label="item.display_name" :value="item.key">
@@ -230,15 +230,15 @@
 
       <!-- 篩選 -->
       <el-dialog class="dialog-mini" width="500px" v-el-drag-dialog :title="'篩選'" :visible.sync="dialogFilter" :close-on-click-modal="false" :close-on-press-escape="false">
-        <el-form :model="listQuery" label-width="80px">
+        <el-form :model="listQuery" label-width="100px">
           <el-form-item label="關鍵字">
             <el-input placeholder="關鍵字(姓名)" v-model="listQuery.key" size="small"></el-input>
           </el-form-item>
 
-          <el-form-item label="角色">
-            <el-select class="w-full" v-model="listQuery.roleId" placeholder="請選擇角色" size="small" clearable>
-              <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id">
-              </el-option>
+          <el-form-item label="是否已成立公司">
+            <el-select class="w-full" v-model="listQuery.HasCompany" placeholder="請選擇是否已成立公司" size="mini" multiple clearable>
+              <el-option :label="'是'" :value="true"></el-option>
+              <el-option :label="'否'" :value="false"></el-option>
             </el-select>
           </el-form-item>
 
@@ -253,22 +253,30 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item label="主要專長">
-            <el-select class="w-full" v-model="listQuery.MainSpecialtyItems" placeholder="請選擇主要專長" size="mini" multiple clearable>
-              <el-option v-for="item in mainExpertiseList" :key="item.id" :label="item.name" :value="item.dtValue"></el-option>
-            </el-select>
-          </el-form-item>
-
           <el-form-item label="產業類別">
-            <el-select class="w-full" v-model="listQuery.IndustryTypeItems" placeholder="請選擇產業類別" size="mini" multiple clearable>
-              <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue">
+            <el-select class="w-full" v-model="listQuery.BusinessStageItems" placeholder="請選擇產業類別" size="mini" multiple clearable>
+              <el-option v-for="item in businessList" :key="item.id" :label="item.name" :value="item.dtValue">
               </el-option>
             </el-select>
           </el-form-item>
 
-          <el-form-item label="創建日期">
-            <el-date-picker class="w-full" v-model="createTimeDateRange" type="daterange" range-separator="至" start-placeholder="開始日期" end-placeholder="結束日期" value-format="yyyy-MM-dd" size="small">
-            </el-date-picker>
+          <el-form-item label="創業階段">
+            <el-select class="w-full" v-model="listQuery.IndustryTypeItems" placeholder="請選擇創業階段" size="mini" multiple>
+              <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue"></el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="感興趣的資訊">
+            <el-select class="filter-item w-full" v-model="listQuery.Interest" placeholder="請選擇感興趣的資訊" size="mini" multiple>
+              <el-option label="補助方案" value="補助方案"></el-option>
+              <el-option label="融資方案" value="融資方案"></el-option>
+              <el-option label="投資方案" value="投資方案"></el-option>
+              <el-option label="競賽資訊" value="競賽資訊"></el-option>
+              <el-option label="創業活動資訊" value="創業活動資訊"></el-option>
+              <el-option label="輔導計畫" value="輔導計畫"></el-option>
+              <el-option label="創業時事" value="創業時事"></el-option>
+              <el-option label="其他" value="其他"></el-option>
+            </el-select>
           </el-form-item>
         </el-form>
 
@@ -356,6 +364,7 @@ export default {
         District: "",
         BusinessStageItems: [],
         IndustryTypeItems: [],
+        Interest: [],
         page: 1,
         limit: 20,
         orderby: "",
@@ -384,7 +393,7 @@ export default {
         account: "",
         name: "",
         password: "",
-        roleIds: "",
+        roleIds: "172800227819589",
         status: 1,
         organizationIds: "",
         email: "",
@@ -608,17 +617,19 @@ export default {
         case "btnFilter":
           // eslint-disable-next-line
           if (
-            typeof this.listQuery.MainSpecialtyItems == "string" &&
-            !!this.listQuery.MainSpecialtyItems
+            typeof this.listQuery.BusinessStageItems == "string" &&
+            !!this.listQuery.BusinessStageItems
           ) {
-            this.listQuery.MainSpecialtyItems =
-              this.listQuery.MainSpecialtyItems.split(",");
+            this.listQuery.BusinessStageItems =
+              this.listQuery.BusinessStageItems.split(",");
           }
-          // this.listQuery.MainSpecialtyItems = !!this.listQuery
-          //   .MainSpecialtyItems
-          //   ? this.listQuery.MainSpecialtyItems.split(",")
-          //   : [];
-
+          // eslint-disable-next-line
+          if (
+            typeof this.listQuery.Interest == "string" &&
+            !!this.listQuery.Interest
+          ) {
+            this.listQuery.Interest = this.listQuery.Interest.split(",");
+          }
           // eslint-disable-next-line
           if (
             typeof this.listQuery.IndustryTypeItems == "string" &&
@@ -718,7 +729,7 @@ export default {
         id: undefined,
         account: "",
         password: "",
-        roleIds: "",
+        roleIds: "172800227819589",
         name: "",
         status: 1,
         organizationIds: "",
@@ -991,13 +1002,21 @@ export default {
 
     /* 篩選 */
     filterList() {
-      this.listQuery.MainSpecialtyItems =
-        this.listQuery.MainSpecialtyItems.length > 0
-          ? this.listQuery.MainSpecialtyItems.join(",")
-          : "";
+      // this.listQuery.MainSpecialtyItems =
+      //   this.listQuery.MainSpecialtyItems.length > 0
+      //     ? this.listQuery.MainSpecialtyItems.join(",")
+      //     : "";
       this.listQuery.IndustryTypeItems =
         this.listQuery.IndustryTypeItems.length > 0
           ? this.listQuery.IndustryTypeItems.join(",")
+          : "";
+      this.listQuery.BusinessStageItems =
+        this.listQuery.BusinessStageItems.length > 0
+          ? this.listQuery.BusinessStageItems.join(",")
+          : "";
+      this.listQuery.Interest =
+        this.listQuery.Interest.length > 0
+          ? this.listQuery.Interest.join(",")
           : "";
       this.getList();
       this.dialogFilter = false;

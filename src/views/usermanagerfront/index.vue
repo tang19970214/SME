@@ -253,15 +253,15 @@
             </el-select>
           </el-form-item>
 
-          <el-form-item label="產業類別">
-            <el-select class="w-full" v-model="listQuery.BusinessStageItems" placeholder="請選擇產業類別" size="mini" multiple clearable>
+          <el-form-item label="創業階段">
+            <el-select class="w-full" v-model="listQuery.BusinessStageItems" placeholder="請選擇創業階段" size="mini" multiple clearable>
               <el-option v-for="item in businessList" :key="item.id" :label="item.name" :value="item.dtValue">
               </el-option>
             </el-select>
           </el-form-item>
 
-          <el-form-item label="創業階段">
-            <el-select class="w-full" v-model="listQuery.IndustryTypeItems" placeholder="請選擇創業階段" size="mini" multiple>
+          <el-form-item label="產業類別">
+            <el-select class="w-full" v-model="listQuery.IndustryTypeItems" placeholder="請選擇產業類別" size="mini" multiple>
               <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue"></el-option>
             </el-select>
           </el-form-item>

@@ -61,7 +61,7 @@
                 <template slot-scope="scope">
                   <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">編輯</el-button>
                   <el-button size="mini" type="danger" v-if="hasButton('btnStop') && scope.row.status == 1" @click="handleModifyStatus(scope.row, 0)">停用</el-button>
-                  <el-button type="info" size="mini" @click="openUserDialog('coaching', scope.row.id)">輔導顧問</el-button>
+                  <!-- <el-button type="info" size="mini" @click="openUserDialog('coaching', scope.row.id)">輔導顧問</el-button> -->
                   <el-button type="info" size="mini" @click="openUserDialog('basic', scope.row.id)">基本資料</el-button>
                   <el-button type="info" size="mini" @click="openUserDialog('developing', scope.row.id)">公司發展階段</el-button>
                   <el-button type="info" size="mini" @click="openUserDialog('operations', scope.row.id)">營運狀況</el-button>

@@ -199,7 +199,7 @@
           </el-tab-pane>
 
           <!-- 一般會員資料匯出 -->
-          <el-tab-pane label="一般會員資料匯出" name="一般會員資料匯出">
+          <!-- <el-tab-pane label="一般會員資料匯出" name="一般會員資料匯出">
             <el-form :model="tempExport" label-width="90px">
               <el-form-item label="關鍵字">
                 <el-input placeholder="關鍵字(姓名)" v-model="tempExport.key"></el-input>
@@ -236,7 +236,7 @@
                 </el-select>
               </el-form-item>
             </el-form>
-          </el-tab-pane>
+          </el-tab-pane> -->
         </el-tabs>
 
         <div slot="footer">

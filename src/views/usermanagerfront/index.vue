@@ -134,7 +134,7 @@
       <el-dialog class="dialog-mini" width="500px" v-el-drag-dialog :title="'匯出'" :visible.sync="dialogExport" :close-on-click-modal="false" :close-on-press-escape="false">
         <el-tabs v-model="expoerActiveName" @tab-click="handleClick">
           <!-- 帳號資料匯出 -->
-          <el-tab-pane label="帳號資料匯出" name="帳號資料匯出">
+          <!-- <el-tab-pane label="帳號資料匯出" name="帳號資料匯出">
             <el-form :model="tempExport" label-width="80px">
               <el-form-item label="角色">
                 <el-select class="w-full" v-model="tempExport.roleId" placeholder="請選擇角色">
@@ -146,10 +146,10 @@
                 <el-input placeholder="關鍵字(姓名)" v-model="tempExport.key"></el-input>
               </el-form-item>
             </el-form>
-          </el-tab-pane>
+          </el-tab-pane> -->
 
           <!-- 顧問資料匯出 -->
-          <el-tab-pane label="顧問資料匯出" name="顧問資料匯出">
+          <!-- <el-tab-pane label="顧問資料匯出" name="顧問資料匯出">
             <el-form :model="tempExport" label-width="80px">
               <el-form-item label="關鍵字">
                 <el-input placeholder="關鍵字(姓名)" v-model="tempExport.key"></el-input>
@@ -179,7 +179,7 @@
                 </el-select>
               </el-form-item>
             </el-form>
-          </el-tab-pane>
+          </el-tab-pane> -->
 
           <!-- 一般會員資料匯出 -->
           <el-tab-pane label="一般會員資料匯出" name="一般會員資料匯出">

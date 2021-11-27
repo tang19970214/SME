@@ -936,6 +936,10 @@ export default {
           it.$treeNodeId = key + 1;
           return it;
         });
+        // 隱藏一般會員
+        this.roleOptions = this.roleOptions.filter(
+          (i) => i.label !== "一般會員"
+        );
         this.selectRoleNames = [...response.result]
           .filter((x) => this.selectRoles.indexOf(x.id) > -1)
           .map((item) => item.name || item.account)

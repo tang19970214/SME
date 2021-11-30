@@ -198,6 +198,9 @@
           <el-form-item size="small" :label="'前台連結'">
             <el-input type="text" v-model="temp.url"></el-input>
           </el-form-item>
+          <el-form-item size="small" :label="'前台網址'">
+            <el-input type="text" v-model="temp.frontUrl"></el-input>
+          </el-form-item>
         </el-form>
 
         <div slot="footer" class="h-full flex-items-c-justify-c">
@@ -322,6 +325,7 @@ export default {
         webName: "",
         webLink: "",
         url: "",
+        frontUrl: "",
       },
       dateRange: "",
       dialogStatus: "",
@@ -520,6 +524,7 @@ export default {
         webName: "",
         webLink: "",
         url: "",
+        frontUrl: "",
       };
     },
     handleCreate() {

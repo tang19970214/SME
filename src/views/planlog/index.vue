@@ -2,7 +2,7 @@
   <div class="app-container flex-item">
     <sticky :className="'sub-navbar'">
       <div class="filter-container">
-        <el-button type="warning" size="mini" @click="dialogFilter = true">篩選</el-button>
+        <el-button type="warning" size="mini" @click="openDialogFilter()">篩選</el-button>
         <el-button type="primary" size="mini" @click="exportFile()">匯出</el-button>
       </div>
     </sticky>
@@ -38,7 +38,7 @@
         </el-form-item>
 
         <el-form-item label="Q2 是否已成立公司行號">
-          <el-select class="w-full" v-model="listQuery.Q2" size="small">
+          <el-select class="w-full" v-model="listQuery.Q2" size="small" clearable>
             <el-option label="是" value="是"></el-option>
             <el-option label="否" value="否"></el-option>
           </el-select>
@@ -60,7 +60,7 @@
         </el-form-item>
 
         <el-form-item label="Q5. 資金需求範圍">
-          <el-select class="w-full" v-model="listQuery.Q7" size="small">
+          <el-select class="w-full" v-model="listQuery.Q7" size="small" clearable>
             <el-option label="50萬以下" value="50萬以下"></el-option>
             <el-option label="50-100萬" value="50-100萬"></el-option>
             <el-option label="100-300萬" value="100-300萬"></el-option>
@@ -103,12 +103,12 @@
         </el-form-item>
 
         <el-form-item label="起迄日期">
-          <el-date-picker class="w-full" v-model="dateRange" type="daterange" size="mini" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="開始日期" end-placeholder="結束日期">
+          <el-date-picker class="w-full" v-model="dateRange" type="daterange" size="mini" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="開始日期" end-placeholder="結束日期" clearable>
           </el-date-picker>
         </el-form-item>
 
         <el-form-item label="關鍵字">
-          <el-input class="w-full" v-model="listQuery.key" size="mini" placeholder="請輸入關鍵字">
+          <el-input class="w-full" v-model="listQuery.key" size="mini" placeholder="請輸入關鍵字" clearable>
           </el-input>
         </el-form-item>
       </el-form>
@@ -189,6 +189,26 @@ export default {
         }
         this.listLoading = false;
       });
+    },
+    openDialogFilter() {
+      // eslint-disable-next-line
+      this.listQuery.Q1 = !!this.listQuery.Q1
+        ? this.listQuery.Q1.split(",")
+        : "";
+      // eslint-disable-next-line
+      this.listQuery.Q6 = !!this.listQuery.Q6
+        ? this.listQuery.Q6.split(",")
+        : "";
+      // eslint-disable-next-line
+      this.listQuery.Q8 = !!this.listQuery.Q8
+        ? this.listQuery.Q8.split(",")
+        : "";
+      // eslint-disable-next-line
+      this.listQuery.Q9 = !!this.listQuery.Q9
+        ? this.listQuery.Q9.split(",")
+        : "";
+
+      this.dialogFilter = true;
     },
 
     // 匯出

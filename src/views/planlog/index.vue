@@ -227,7 +227,7 @@ export default {
         };
 
         const url =
-          "http://sme.yummydesign.com.tw/sys/api/Planss/exporPlanLog?Q1=" +
+          `${process.env.VUE_APP_BASE_API}Planss/exporPlanLog?Q1=` +
           this.listQuery.Q1 +
           "&Q2=" +
           this.listQuery.Q2 +

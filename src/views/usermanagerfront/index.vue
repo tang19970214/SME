@@ -68,6 +68,7 @@
                   <el-button type="info" size="mini" @click="openUserDialog('teams', scope.row.id)">經營團隊說明</el-button>
                   <el-button type="info" size="mini" @click="openUserDialog('shareHolders', scope.row.id)">股東結構說明</el-button>
                   <el-button type="info" size="mini" @click="openUserDialog('other', scope.row.id)">其他項目</el-button>
+                  <el-button type="info" size="mini" @click="goPrintPage(scope.row.id)">列印</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -994,6 +995,9 @@ export default {
       };
 
       this.listDialogForm = true;
+    },
+    goPrintPage(id) {
+      window.open(`${process.env.VUE_APP_BASE_URL}#/print?id=${id}`, "_blank");
     },
     closeDialogForm() {
       this.listDialogForm = false;

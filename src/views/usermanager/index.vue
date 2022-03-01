@@ -26,15 +26,12 @@
         <el-col :span="18" class="fh">
           <div class="bg-white fh">
             <el-table ref="mainTable" :key="tableKey" :data="list" v-loading="listLoading" border fit highlight-current-row style="width: 100%" height="calc(100% - 52px)" @row-click="rowClick" @selection-change="handleSelectionChange">
-              <el-table-column align="center" type="selection" width="55">
-              </el-table-column>
+              <el-table-column align="center" type="selection" width="55"> </el-table-column>
 
               <el-table-column :label="'Id'" v-if="showDescription" width="180px" prop="id"></el-table-column>
               <el-table-column width="150px" :label="'帳號'">
                 <template slot-scope="scope">
-                  <span class="link-type" @click="handleUpdate(scope.row)">{{
-                    scope.row.account
-                  }}</span>
+                  <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.account }}</span>
                 </template>
               </el-table-column>
 
@@ -47,10 +44,7 @@
 
               <el-table-column class-name="status-col" :label="'狀態'" width="80">
                 <template slot-scope="scope">
-                  <span :class="scope.row.status | statusFilter">{{
-                    statusOptions.find((u) => u.key == scope.row.status)
-                      .display_name
-                  }}</span>
+                  <span :class="scope.row.status | statusFilter">{{ statusOptions.find((u) => u.key == scope.row.status).display_name }}</span>
                 </template>
               </el-table-column>
 
@@ -61,30 +55,13 @@
                 <template slot-scope="scope">
                   <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">編輯</el-button>
                   <el-button size="mini" type="danger" v-if="hasButton('btnStop') && scope.row.status == 1" @click="handleModifyStatus(scope.row, 0)">停用</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnUserSup') &&
-                      setCoachingAuth(scope.row.roles)
-                    " @click="openUserDialog('coaching', scope.row.id)">輔導顧問</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnBasic') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('basic', scope.row.id)">基本資料</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnCompany') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('developing', scope.row.id)">公司發展階段</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnCompanyOperation') &&
-                      setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('operations', scope.row.id)">營運狀況</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnTeams') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('teams', scope.row.id)">經營團隊說明</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnShareHolder') &&
-                      setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('shareHolders', scope.row.id)">股東結構說明</el-button>
-                  <el-button type="info" size="mini" v-if="
-                      hasButton('btnOther') && setBasicAuth(scope.row.roles)
-                    " @click="openUserDialog('other', scope.row.id)">其他項目</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnUserSup') && setCoachingAuth(scope.row.roles)" @click="openUserDialog('coaching', scope.row.id)">輔導顧問</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnBasic') && setBasicAuth(scope.row.roles)" @click="openUserDialog('basic', scope.row.id)">基本資料</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnCompany') && setBasicAuth(scope.row.roles)" @click="openUserDialog('developing', scope.row.id)">公司發展階段</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnCompanyOperation') && setBasicAuth(scope.row.roles)" @click="openUserDialog('operations', scope.row.id)">營運狀況</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnTeams') && setBasicAuth(scope.row.roles)" @click="openUserDialog('teams', scope.row.id)">經營團隊說明</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnShareHolder') && setBasicAuth(scope.row.roles)" @click="openUserDialog('shareHolders', scope.row.id)">股東結構說明</el-button>
+                  <el-button type="info" size="mini" v-if="hasButton('btnOther') && setBasicAuth(scope.row.roles)" @click="openUserDialog('other', scope.row.id)">其他項目</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -105,19 +82,14 @@
             <el-input v-model="temp.name"></el-input>
           </el-form-item>
           <el-form-item size="small" :label="'密碼'" prop="password">
-            <el-input v-model="temp.password" :placeholder="
-                dialogStatus == 'update'
-                  ? '如果為空則不修改密碼'
-                  : '如果為空則默認與帳號相同'
-              "></el-input>
+            <el-input v-model="temp.password" :placeholder="dialogStatus == 'update' ? '如果為空則不修改密碼' : '如果為空則默認與帳號相同'"></el-input>
           </el-form-item>
           <el-form-item size="small" :label="'角色'">
             <treeselect :options="roleOptions" :default-expand-level="3" :multiple="true" :flat="true" :open-on-click="true" :open-on-focus="true" :clear-on-select="true" v-model="selectRoleIds"></treeselect>
           </el-form-item>
           <el-form-item size="small" :label="'狀態'">
             <el-select class="filter-item w-full" v-model="temp.status" placeholder="Please select">
-              <el-option v-for="item in statusOptions" :key="item.key" :label="item.display_name" :value="item.key">
-              </el-option>
+              <el-option v-for="item in statusOptions" :key="item.key" :label="item.display_name" :value="item.key"> </el-option>
             </el-select>
           </el-form-item>
           <el-form-item size="small" :label="'所屬機構'">
@@ -174,12 +146,10 @@
 
               <el-form-item label="縣市區域">
                 <el-select class="w-full" v-model="tempExport.County" placeholder="請選擇縣市區域">
-                  <el-option v-for="(item, idx) in countyData" :key="idx" :label="item.label" :value="item.value">
-                  </el-option>
+                  <el-option v-for="(item, idx) in countyData" :key="idx" :label="item.label" :value="item.value"> </el-option>
                 </el-select>
                 <el-select class="w-full" v-model="tempExport.District" placeholder="請選擇區域" no-data-text="請先選擇縣市" :disabled="dialogStatus == 'view'">
-                  <el-option v-for="(items, $index) in ChooseCounty(districtData)" :key="'DT_' + $index" :label="items.label" :value="items.value">
-                  </el-option>
+                  <el-option v-for="(items, $index) in ChooseCounty(districtData)" :key="'DT_' + $index" :label="items.label" :value="items.value"> </el-option>
                 </el-select>
               </el-form-item>
 
@@ -191,8 +161,7 @@
 
               <el-form-item label="產業類別">
                 <el-select class="w-full" v-model="tempExport.IndustryTypeItem" placeholder="請選擇產業類別" multiple collapse-tags>
-                  <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue">
-                  </el-option>
+                  <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue"> </el-option>
                 </el-select>
               </el-form-item>
             </el-form>
@@ -254,19 +223,16 @@
 
           <el-form-item label="角色">
             <el-select class="w-full" v-model="listQuery.roleId" placeholder="請選擇角色" size="small" clearable>
-              <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id">
-              </el-option>
+              <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id"> </el-option>
             </el-select>
           </el-form-item>
 
           <el-form-item label="縣市區域">
             <el-select class="w-full" v-model="listQuery.County" placeholder="請選擇縣市區域" size="small" clearable>
-              <el-option v-for="(item, idx) in countyData" :key="idx" :label="item.label" :value="item.value">
-              </el-option>
+              <el-option v-for="(item, idx) in countyData" :key="idx" :label="item.label" :value="item.value"> </el-option>
             </el-select>
             <el-select class="w-full" v-model="listQuery.District" placeholder="請選擇區域" size="small" no-data-text="請先選擇縣市" :disabled="dialogStatus == 'view'" clearable>
-              <el-option v-for="(items, $index) in ChooseCounty(districtData)" :key="'DT_' + $index" :label="items.label" :value="items.value">
-              </el-option>
+              <el-option v-for="(items, $index) in ChooseCounty(districtData)" :key="'DT_' + $index" :label="items.label" :value="items.value"> </el-option>
             </el-select>
           </el-form-item>
 
@@ -278,14 +244,12 @@
 
           <el-form-item label="產業類別">
             <el-select class="w-full" v-model="listQuery.IndustryTypeItems" placeholder="請選擇產業類別" size="mini" multiple clearable>
-              <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue">
-              </el-option>
+              <el-option v-for="item in industryList" :key="item.id" :label="item.name" :value="item.dtValue"> </el-option>
             </el-select>
           </el-form-item>
 
           <el-form-item label="創建日期">
-            <el-date-picker class="w-full" v-model="createTimeDateRange" type="daterange" range-separator="至" start-placeholder="開始日期" end-placeholder="結束日期" value-format="yyyy-MM-dd" size="small">
-            </el-date-picker>
+            <el-date-picker class="w-full" v-model="createTimeDateRange" type="daterange" range-separator="至" start-placeholder="開始日期" end-placeholder="結束日期" value-format="yyyy-MM-dd" size="small"> </el-date-picker>
           </el-form-item>
         </el-form>
 
@@ -460,15 +424,11 @@ export default {
     selectOrgs: {
       get: function () {
         console.log(this.temp.organizationIds, this.dialogStatus);
-        if (this.dialogStatus === "update") {
-          return (
-            (this.temp.organizationIds &&
-              this.temp.organizationIds.split(",")) ||
-            []
-          );
-        } else {
-          return [];
-        }
+        // if (this.dialogStatus === "update") {
+        return (this.temp.organizationIds && this.temp.organizationIds.split(",")) || [];
+        // } else {
+        //   return [];
+        // }
       },
       set: function (v) {
         var _this = this;
@@ -491,17 +451,13 @@ export default {
     setBasicAuth() {
       return (roles) => {
         const getRoles = roles.split(",");
-        return getRoles.filter((i) => i == "一般會員").length > 0
-          ? true
-          : false;
+        return getRoles.filter((i) => i == "一般會員").length > 0 ? true : false;
       };
     },
     setCoachingAuth() {
       return (roles) => {
         const getRoles = roles.split(",");
-        return getRoles.filter((i) => i == "輔導顧問").length > 0
-          ? true
-          : false;
+        return getRoles.filter((i) => i == "輔導顧問").length > 0 ? true : false;
       };
     },
     ChooseCounty() {
@@ -541,9 +497,7 @@ export default {
     login.getRoles().then((res) => {
       // console.log("orgstree", res.result);
       const rolesList = res.result;
-      const getMaxRole = rolesList?.filter(
-        (item) => item.id == "172800417542214"
-      );
+      const getMaxRole = rolesList?.filter((item) => item.id == "172800417542214");
       if (getMaxRole.length > 0) {
         this.isMaxRole = true;
       }
@@ -624,12 +578,8 @@ export default {
           break;
         case "btnFilter":
           // eslint-disable-next-line
-          if (
-            typeof this.listQuery.MainSpecialtyItems == "string" &&
-            !!this.listQuery.MainSpecialtyItems
-          ) {
-            this.listQuery.MainSpecialtyItems =
-              this.listQuery.MainSpecialtyItems.split(",");
+          if (typeof this.listQuery.MainSpecialtyItems == "string" && !!this.listQuery.MainSpecialtyItems) {
+            this.listQuery.MainSpecialtyItems = this.listQuery.MainSpecialtyItems.split(",");
           }
           // this.listQuery.MainSpecialtyItems = !!this.listQuery
           //   .MainSpecialtyItems
@@ -637,12 +587,8 @@ export default {
           //   : [];
 
           // eslint-disable-next-line
-          if (
-            typeof this.listQuery.IndustryTypeItems == "string" &&
-            !!this.listQuery.IndustryTypeItems
-          ) {
-            this.listQuery.IndustryTypeItems =
-              this.listQuery.IndustryTypeItems.split(",");
+          if (typeof this.listQuery.IndustryTypeItems == "string" && !!this.listQuery.IndustryTypeItems) {
+            this.listQuery.IndustryTypeItems = this.listQuery.IndustryTypeItems.split(",");
           }
           // this.listQuery.IndustryTypeItems = !!this.listQuery.IndustryTypeItems
           //   ? this.listQuery.IndustryTypeItems.split(",")
@@ -657,10 +603,8 @@ export default {
 
     getList() {
       this.listLoading = true;
-      this.listQuery.CreateStartDate =
-        this.createTimeDateRange?.length > 0 ? this.createTimeDateRange[0] : "";
-      this.listQuery.CreateEndDate =
-        this.createTimeDateRange?.length > 0 ? this.createTimeDateRange[1] : "";
+      this.listQuery.CreateStartDate = this.createTimeDateRange?.length > 0 ? this.createTimeDateRange[0] : "";
+      this.listQuery.CreateEndDate = this.createTimeDateRange?.length > 0 ? this.createTimeDateRange[1] : "";
       users.getList(this.listQuery).then((response) => {
         this.list = response.data;
         this.total = response.count;
@@ -937,9 +881,7 @@ export default {
           return it;
         });
         // 隱藏一般會員
-        this.roleOptions = this.roleOptions.filter(
-          (i) => i.label !== "一般會員"
-        );
+        this.roleOptions = this.roleOptions.filter((i) => i.label !== "一般會員");
         this.selectRoleNames = [...response.result]
           .filter((x) => this.selectRoles.indexOf(x.id) > -1)
           .map((item) => item.name || item.account)
@@ -1012,14 +954,8 @@ export default {
 
     /* 篩選 */
     filterList() {
-      this.listQuery.MainSpecialtyItems =
-        this.listQuery.MainSpecialtyItems.length > 0
-          ? this.listQuery.MainSpecialtyItems.join(",")
-          : "";
-      this.listQuery.IndustryTypeItems =
-        this.listQuery.IndustryTypeItems.length > 0
-          ? this.listQuery.IndustryTypeItems.join(",")
-          : "";
+      this.listQuery.MainSpecialtyItems = this.listQuery.MainSpecialtyItems.length > 0 ? this.listQuery.MainSpecialtyItems.join(",") : "";
+      this.listQuery.IndustryTypeItems = this.listQuery.IndustryTypeItems.length > 0 ? this.listQuery.IndustryTypeItems.join(",") : "";
       this.getList();
       this.dialogFilter = false;
     },
